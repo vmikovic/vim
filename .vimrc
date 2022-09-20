@@ -4,7 +4,6 @@ set noexpandtab
 set tabstop=8
 set softtabstop=8
 set shiftwidth=8
-
 set nocompatible
 set showcmd
 
@@ -46,11 +45,8 @@ set lazyredraw          " no redraws in macros
 set confirm             " get a dialog when :q, :w, or :wq fails
 set nobackup            " no backup~ files.
 set viminfo='20,\"500   " remember copy registers after quitting in the .viminfo file -- 20 jump links, regs up to 500 lines'
-set hidden              " remember undo after quitting
 set history=50          " keep 50 lines of command history
 set mouse=v             " use mouse in visual mode (not normal,insert,command,help mode
-
-
 
 " color settings (if terminal/gui supports it)
 if &t_Co > 2 || has("gui_running")
@@ -145,6 +141,7 @@ vmap <C-c><C-c> "ry :call Send_to_Screen(@r)<CR>
 nmap <C-c><C-c> vip<C-c><C-c>
 
 nmap <C-c>v :call Screen_Vars()<CR>
+"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "Koristim VIM native podrsku za plugin ove

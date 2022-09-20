@@ -1,3 +1,5 @@
+" Pocetna verzija 
+"
 " This script contains mappings
 source ~/.vim/mapping.vim
 " additional helper functions:

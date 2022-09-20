@@ -54,7 +54,6 @@ function! Circo()
 	imap t т
 	imap U У
 	imap u у
-
 	imap Lj Љ
 	imap LJ Љ
 	imap lj љ
@@ -120,33 +119,25 @@ function! NoCirco()
 	iunmap t
 	iunmap U
 	iunmap u
-
 	iunmap LJ
 	iunmap Lj
 	iunmap lj
-
 	iunmap NJ
 	iunmap Nj
 	iunmap nj
-
 	iunmap CH
 	iunmap Ch
 	iunmap ch
-
 	iunmap CC
 	iunmap cc
-
 	iunmap SS
 	iunmap ss
-
 	iunmap DJ
 	iunmap Dj
 	iunmap dj
-
 	iunmap ZZ
 	iunmap Zz
 	iunmap zz
 	imap <F12> <ESC>:call Circo()<CR>i
 endfunction
-
 

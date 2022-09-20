@@ -2,8 +2,11 @@
 "source ~/.vim/mapping.vim
 " additional helper functions:
 "source ~/.vim/functions.vim
-
+"
 " paste mode toggle (needed when using autoindent/smartindent)
+" 
+" 
+"
 map <F10> :set paste<CR>
 map <F11> :set nopaste<CR>
 imap <F10> <C-O>:set paste<CR>

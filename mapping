@@ -1,0 +1,155 @@
+" This script contains mappings
+source ~/.vim/mapping.vim
+" additional helper functions:
+source ~/.vim/functions.vim
+
+" paste mode toggle (needed when using autoindent/smartindent)
+map <F10> :set paste<CR>
+map <F11> :set nopaste<CR>
+imap <F10> <C-O>:set paste<CR>
+imap <F11> <nop>
+
+imap <F12> <ESC>:call Circo()<CR>i
+function! Circo()
+	inoremap M М
+	inoremap m м
+	inoremap A А
+	inoremap a а
+	inoremap B Б
+	inoremap b б
+	inoremap V В
+	inoremap v в
+	imap C Ц
+	inoremap c ц 
+	inoremap D Д
+	inoremap d д
+	inoremap E Е
+	inoremap e е
+	inoremap F Ф
+	inoremap f ф
+	inoremap G Г
+	inoremap g г
+	inoremap H Х
+	inoremap h х
+	inoremap I И
+	inoremap i и
+	inoremap J Ј
+	inoremap j ј
+	inoremap K К
+	inoremap k к
+	inoremap L Л
+	inoremap l л
+	inoremap N Н
+	inoremap n н
+	inoremap O О
+	inoremap o о
+	inoremap P П
+	inoremap p п
+	inoremap R Р
+	inoremap r р
+	inoremap S С
+	inoremap s с
+	inoremap T Т
+	inoremap t т
+	inoremap U У
+	inoremap u у
+
+	inoremap Lj Љ
+	inoremap LJ Љ
+	inoremap lj љ
+
+	inoremap NJ Њ
+	inoremap Nj Њ
+	inoremap nj њ
+	
+	inoremap CH Ћ
+	inoremap Ch Ћ
+	inoremap ch ћ
+
+	inoremap CC Ч
+	inoremap cc ч
+
+	inoremap SS Ш
+	inoremap ss ш
+
+	inoremap DJ Ђ
+	inoremap Dj Ђ
+	inoremap dj ђ
+
+	inoremap ZZ Ж
+	inoremap Zz Ж
+	inoremap zz ж
+endfunction
+
+set pastetoggle=<F11>
+
+" Use of the filetype plugins, auto completion and indentation support
+filetype plugin indent on
+
+" file type specific settings
+if has("autocmd")
+	" For debugging
+	"set verbose=9
+
+	" if bash is sh.
+	let bash_is_sh=1
+
+	" change to directory of current file automatically
+	autocmd BufEnter * lcd %:p:h
+
+	" Put these in an autocmd group, so that we can delete them easily.
+	augroup mysettings
+		au FileType xslt,xml,css,html,xhtml,javascript,sh,config,c,cpp,docbook set smartindent shiftwidth=2 softtabstop=2 expandtab
+		au FileType tex set wrap shiftwidth=2 softtabstop=2 expandtab
+
+		" Confirm to PEP8
+		au FileType python set tabstop=4 softtabstop=4 expandtab shiftwidth=4 cinwords=if,elif,else,for,while,try,except,finally,def,class
+	augroup END
+
+	augroup perl
+		" reset (disable previous 'augroup perl' settings)
+		au!
+
+		au BufReadPre,BufNewFile
+					\ *.pl,*.pm
+					\ set formatoptions=croq smartindent shiftwidth=2 softtabstop=2 cindent cinkeys='0{,0},!^F,o,O,e' " tags=./tags,tags,~/devel/tags,~/devel/C
+		" formatoption:
+		"   t - wrap text using textwidth
+		"   c - wrap comments using textwidth (and auto insert comment leader)
+		"   r - auto insert comment leader when pressing <return> in insert mode
+		"   o - auto insert comment leader when pressing 'o' or 'O'.
+		"   q - allow formatting of comments with "gq"
+		"   a - auto formatting for paragraphs
+		"   n - auto wrap numbered lists
+		"
+	augroup END
+
+
+	" Always jump to the last known cursor position.
+	" Don't do it when the position is invalid or when inside
+	" an event handler (happens when dropping a file on gvim).
+	autocmd BufReadPost *
+				\ if line("'\"") > 0 && line("'\"") <= line("$") |
+				\   exe "normal g`\"" |
+				\ endif
+
+endif " has("autocmd")
+
+""""""""""Podrska za screen terminal mux""""""""""""""""""""""""""""""
+
+function Send_to_Screen(text)
+  if !exists("g:screen_sessionname") || !exists("g:screen_windowname")
+    call Screen_Vars()
+  end
+
+  echo system("screen -S " . g:screen_sessionname . " -p " . g:screen_windowname . " -X stuff '" . substitute(a:text, "'", "'\\\\''", 'g') . "'")
+endfunction
+
+function Screen_Session_Names(A,L,P)
+  return system("screen -ls | awk '/Attached/ {print $1}'")
+endfunction
+
+function Screen_Vars()
+  if !exists("g:screen_sessionname") || !exists("g:screen_windowname")
+    let g:screen_sessionname = ""
+    let g:screen_windowname = "0"

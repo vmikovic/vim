@@ -1,0 +1,69 @@
+cd to/neki/dir
+git init
+git status
+git branch
+git checkout
+git commit --allow-empty -m "Initialization"
+git checkout main
+git add *
+git commit
+git remote add origin https://github.com/vmikovic/vim.git
+................................
+git push  -f origin main
+git push --force-with-lease
+If you just used git init and have added your 
+files with git add . or something similar and
+have added your remote branch it might be that 
+you just haven't committed (git commit -m 'commit message') 
+anything locally to push to the remote... 
+I just had this error and that was my issue.
+
+
+
+I had the same problem. I was getting this problem because 
+I had not made any commits, not even an initial commit 
+and still I was trying to push.
+Once I did git commit -m "your msg", everything worked fine.
+
+git branch -m new-name
+git push -u new-name
+
+
+
+    git init
+
+    git remote add origin https://gitlab.com/crew-chief-systems/bot
+
+    git remote -v (for checking current repository)
+
+    git add -A(add all files)
+
+    git commit -m 'Added my project'
+
+    git pull --rebase origin master
+
+    git push  origin master
+
+
+...........................................................
+git push
+
+
+
+
+Posle se radi na sledeci nacin
+
+- editujes teki fajl
+- proveris status: 
+	git status
+
+- komitujes izmene: 
+	git commit -am "Pocetni fajl"
+
+- prebacis izmene u remote repozitorijum: 
+	git push
+
+
+
+
+
